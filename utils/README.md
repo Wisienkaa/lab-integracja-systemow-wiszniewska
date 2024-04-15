@@ -41,14 +41,14 @@ source env_wiszniewska/Scripts activate
 
 ![venv](screen-shot-django.png)
 
-Widzimy folder mysite, struktura katalogów ma się następująco:
-djangogirls
-├───manage.py
-├───mysite
-│ settings.py
-│ urls.py
-│ wsgi.py
-│ **init**.py
+Widzimy folder mysite, struktura katalogów ma się następująco:  
+djangogirls  
+├───manage.py  
+├───mysite  
+│ settings.py  
+│ urls.py  
+│ wsgi.py  
+│ **init**.py  
 └───requirements.txt
 
 -zmiana ustawień w pliku mysite/settings.py (czas, język, ścieżka do plików statycznych, zmiana nazwy hosta)
@@ -65,3 +65,6 @@ ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
 ```bash
 python manage.py migrate
 ```
+
+-inicjalizacja serwera
+![venv](screen-shot-serverinit.png)
