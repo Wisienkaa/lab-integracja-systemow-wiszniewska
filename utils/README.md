@@ -68,3 +68,24 @@ python manage.py migrate
 
 -inicjalizacja serwera
 ![venv](screen-shot-serverinit.png)
+
+-tworzenie aplikacji
+
+```bash
+python manage.py startapp blog
+```
+
+-dodanie aplikacji w ustawieniach django mysite/settings.py
+
+```
+INSTALLED_APPS = [
+    ...,
+    'blog',
+]
+```
+
+-utworzenie modelu wpisu na blogu (kod wg. tutoriala od djangogrils)  
+-utworzenie tabeli dla modeli w bazie danych  
+![venv](screen-shot-databaseok.png)
+
+-Następny krok to administracja django
