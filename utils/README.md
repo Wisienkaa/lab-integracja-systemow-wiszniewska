@@ -89,3 +89,5 @@ INSTALLED_APPS = [
 ![venv](screen-shot-databaseok.png)
 
 -Następny krok to administracja django
+Utworzyłam superusera
+![venv](screen-shot-superuser.png)
