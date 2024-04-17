@@ -1,7 +1,2 @@
-*.pyc
-*~
-__pycache__
-env_wiszniewska
-db.sqlite3
-/static
-.DS_Store
+
+env_wiszniewska/
