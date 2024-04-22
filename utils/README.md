@@ -77,7 +77,7 @@ python manage.py startapp blog
 
 -dodanie aplikacji w ustawieniach django mysite/settings.py
 
-```
+```bash
 INSTALLED_APPS = [
     ...,
     'blog',
@@ -91,3 +91,48 @@ INSTALLED_APPS = [
 -Następny krok to administracja django
 Utworzyłam superusera
 ![venv](screen-shot-superuser.png)
+
+-utworzenie API Tokenu na python anywhere
+
+-wpisanie w terminal na stronie python anywhere
+
+```bash
+pip3.6 install --user pythonanywhere
+pa_autoconfigure_django.py https://github.com/Wisienkaa/lab-integracja-systemow-wiszniewska.git
+python manage.py createsuperuser
+```
+
+Widok strony już na żywo po dodaniu na końcu adresu url /admin/
+![venv](screen-shot-page.png)
+
+-tworzenie pierwszego adresu url w django (mysite/urls.py)
+
+```bash
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('blog.urls')),
+]
+```
+
+-Kod do urls.py w katalogu blog
+
+```bash
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.post_list, name='post_list'),
+]
+```
+
+-utworzenie superuser w python anywhere  
+-po utworzeniu superusera przeszłam w adres url z końcówką /admin i zalogowałam się na swoje konto administratora, a następnie dodałam swój pierwszy post  
+![venv](screen-shot-chomik.png)
+
+-utworzenie pliku post-list.html w ścieżce blog/templates/blog
+
+-pierwszy szablon  
+![venv](screen-shot-itworks.png)
