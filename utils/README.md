@@ -136,3 +136,9 @@ urlpatterns = [
 
 -pierwszy szablon  
 ![venv](screen-shot-itworks.png)
+
+-zrobienie git push lokalnie i git pull w python anywhere oraz reload strony  
+ ![venv](screen-shot-papage.png)
+
+-Dodanie wpisu za pomocą konsoli Django
+![venv](screen-shot-djangopost.png)
