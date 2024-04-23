@@ -8,11 +8,24 @@
         <link rel="stylesheet" href="{% static 'css/blog.css' %}">
         <title>Wisienqaa's blog</title>
     </head>
+    <style>
+            footer {
+                position: fixed; /* Umiejscowienie stopki */
+                bottom: 0; /* Przypisanie stopki do dolnej krawędzi ekranu */
+                width: 100%; /* Szerokość stopki */
+                text-align: center; /* Wyśrodkowanie obrazka */
+            }
+
+            footer img {
+                width: 200px; /* Zmniejszenie szerokości obrazka */
+            }
+    </style>
     <body>
         <div class="page-header">
-            <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+            {% endif %}
             <h1><a href="/">Wisienqaa's Blog</a></h1>
-            
         </div>
         <div class="content container">
             <div class="row">
@@ -22,5 +35,8 @@
                 </div>
             </div>
         </div>
+        <footer>
+            <img src="https://static.vecteezy.com/system/resources/previews/009/584/946/original/cute-and-smile-cartoon-fruit-colorful-character-cherry-free-png.png">
+        </footer>
     </body>
 </html>
