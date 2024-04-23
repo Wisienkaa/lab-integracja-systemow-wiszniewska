@@ -142,3 +142,30 @@ urlpatterns = [
 
 -Dodanie wpisu za pomocą konsoli Django
 ![venv](screen-shot-djangopost.png)
+
+-dodanie pliku css z wykorzystaniem elementów bootstrapa i utworzenie szablonu base.html (szablonu bazowego)
+
+-tworzenie odnośnika do detali na blogu
+
+```bash
+<h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+```
+
+-dodanie URL dla poszczególnych plików
+
+```bash
+urlpatterns = [
+    path('', views.post_list, name='post_list'),
+    path('post/<int:pk>/', views.post_detail, name='post_detail'),
+]
+```
+
+-dodanie widoku dla poszczególnych plików w kodzie views.py, by nie wyskawiał error DoesNotExtist
+
+```bash
+from django.shortcuts import render, get_object_or_404
+
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'blog/post_detail.html', {'post': post})
+```
