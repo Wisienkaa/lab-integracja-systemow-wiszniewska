@@ -169,3 +169,126 @@ def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'blog/post_detail.html', {'post': post})
 ```
+
+-aktualizacja plików statyscznych na serwerze python anywhere w konsoli bash
+
+```bash
+python manage.py collectstatic
+```
+
+-utworzenie pliku forms.py w katalogu blog
+
+```bash
+class PostForm(forms.ModelForm):
+
+    class Meta:
+        model = Post
+        fields = ('title', 'text',)
+```
+
+-dodanie odnośnika z komentarzem w pliku base.html
+
+```bash
+<a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+```
+
+-dodanie adrsu URL w pliku urls.py
+
+```bash
+urlpatterns = [
+    path('', views.post_list, name='post_list'),
+    path('post/<int:pk>/', views.post_detail, name='post_detail'),
+    path('post/new', views.post_new, name='post_new'),
+]
+```
+
+-utworzenie formularza dodającego wpis (aczkolwiek jeszcze nie działa bo user jest anonimowy)
+KOD views.py
+
+```bash
+def post_new(request):
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('post_detail', pk=post.pk)
+    else:
+        form = PostForm()
+    return render(request, 'blog/post_edit.html', {'form': form})
+```
+
+![venv](screen-shot-anon.png)
+
+-dodanie opcji edycji formularza  
+blog/templates/blog/post_detail.html
+
+```bash
+<a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+```
+
+blog/templates/blog/post_detail.html
+
+```bash
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <div class="post">
+        {% if post.published_date %}
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+        {% endif %}
+        <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.text|linebreaksbr }}</p>
+    </div>
+{% endblock %}
+```
+
+blog/urls.py
+
+```bash
+ path('post/<int:pk>/edit/', views.post_edit, name='post_edit'),
+```
+
+blog/views.py
+
+```bash
+ def post_edit(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == "POST":
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('post_detail', pk=post.pk)
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'blog/post_edit.html', {'form': form})
+```
+
+-jednak wszystko działa, zalogowałam się w panelu administracyjnym i mogę teraz dodawać i edytować posty na swojej stronie dowolnie!
+
+![venv](screen-shot-work.png)
+
+-dodanie zabezpieczeń  
+blog/templates/blog/base.html
+
+```bash
+{% if user.is_authenticated %}
+    <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+{% endif %}
+```
+
+blog/templates/blog/post_detail.html
+
+```bash
+{% if user.is_authenticated %}
+     <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+{% endif %}
+```
