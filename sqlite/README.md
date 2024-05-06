@@ -14,7 +14,9 @@ select
 from little_penguins;
 ```
 
-![venv](1.png) 3. Sorting
+![venv](screenshots/1.png)
+
+3. Sorting
 
 ```bash
 select
@@ -25,7 +27,7 @@ from little_penguins
 order by island asc, sex desc;
 ```
 
-![venv](2.png) 4. Exercise
+![venv](screenshots/2.png) 4. Exercise
 Write a SQL query to select the sex and body mass columns from the little_penguins in that order, sorted such that the largest body mass appears first.
 
 ```bash
@@ -34,7 +36,7 @@ FROM little_penguins
 ORDER BY body_mass_g DESC;
 ```
 
-![venv](3.png)
+![venv](screenshots/3.png)
 
 5. Limiting Output
 
@@ -48,7 +50,7 @@ order by species, sex, island
 limit 10;
 ```
 
-![venv](4.png)
+![venv](screenshots/4.png)
 
 6.Paging Output
 
@@ -62,7 +64,7 @@ order by species, sex, island
 limit 10 offset 3;
 ```
 
-![venv](5.png)
+![venv](screenshots/5.png)
 
 7.Removing Duplicates
 
@@ -71,14 +73,15 @@ select distinct
     species,
     sex,
     island
-from penguins;```
-![venv](6.png)
+from penguins;
+```
+![venv](screenshots/6.png)
 
-8.
-Exercise
+8. Exercise
 Write a SQL query to select the islands and species from rows 50 to 60 inclusive of the penguins table. Your result should have 11 rows.
 
 Modify your query to select distinct combinations of island and species from the same rows and compare the result to what you got in part 1.
+
 ```bash
 SELECT island, species
 FROM (
@@ -98,8 +101,8 @@ WHERE row_num BETWEEN 50 AND 60;
 
 ````
 
-![venv](7_1.png)
-![venv](7_2.png)
+![venv](screenshots/7_1.png)
+![venv](screenshots/7_2.png)
 
 9. Filtering Results
 
@@ -112,7 +115,7 @@ from penguins
 where island = 'Biscoe';
 ```
 
-![venv](8.png)
+![venv](screenshots/8.png)
 
 10. Exercise
     Write a query to select the body masses from penguins that are less than 3000.0 grams.
@@ -130,8 +133,8 @@ FROM penguins
 WHERE body_mass_g < 3000.0;
 ```
 
-![venv](9_1.png)
-![venv](9_2.png)
+![venv](screenshots/9_1.png)
+![venv](screenshots/9_2.png)
 
 11. Exercise
     Use the not operator to select penguins that are not Gentoos.
@@ -150,8 +153,8 @@ WHERE (sex = 'female' OR island = 'Torgersen') AND NOT (sex = 'female' AND islan
 
 ```
 
-![venv](10_1.png)
-![venv](10_2.png)
+![venv](screenshots/10_1.png)
+![venv](screenshots/10_2.png)
 
 12. Doing Calculations
 
@@ -163,7 +166,7 @@ from penguins
 limit 3;
 ```
 
-![venv](11.png)
+![venv](screenshots/11.png)
 
 13. Exercise
     Write a single query that calculates and returns:
@@ -179,7 +182,7 @@ SELECT
 FROM penguins;
 ```
 
-![venv](12.png)
+![venv](screenshots/12.png)
 
 14. Calculating with Missing Values
 
@@ -192,7 +195,7 @@ from penguins
 limit 5;
 ```
 
-![venv](13.png)
+![venv](screenshots/13.png)
 
 15. Exercise
     Use SQLite’s .nullvalue command to change the printed representation of null to the string null and then re-run the previous query. When will displaying null as null be easier to understand? When might it be misleading?
@@ -221,8 +224,8 @@ from penguins
 where island = 'Biscoe' and sex = 'FEMALE';
 ```
 
-![venv](14_1.png)
-![venv](14_2.png)
+![venv](screenshots/14_1.png)
+![venv](screenshots/14_2.png)
 
 17. Null Inequality
 
@@ -235,7 +238,7 @@ from penguins
 where island = 'Biscoe' and sex != 'FEMALE';
 ```
 
-![venv](15.png)
+![venv](screenshots/15.png)
 
 18. Handling Null Safely
 
@@ -248,7 +251,7 @@ from penguins
 where sex is null;
 ```
 
-![venv](16.png)
+![venv](screenshots/16.png)
 
 19. Exercise
     Write a query to find penguins whose body mass is known but whose sex is not.
@@ -265,8 +268,8 @@ FROM penguins
 WHERE sex IS NOT NULL AND body_mass_g IS NULL;
 ```
 
-![venv](17_1.png)
-![venv](17_2.png)
+![venv](screenshots/17_1.png)
+![venv](screenshots/17_2.png)
 
 20. Aggregating
 
@@ -275,7 +278,7 @@ select sum(body_mass_g) as total_mass
 from penguins;
 ```
 
-![venv](18.png)
+![venv](screenshots/18.png)
 
 21. Common Aggregation Functions
 
@@ -287,7 +290,7 @@ select
 from penguins;
 ```
 
-![venv](19.png)
+![venv](screenshots/19.png)
 
 22. Exercise
     What is the average body mass of penguins that weight more than 3000.0 grams?
@@ -299,7 +302,7 @@ WHERE body_mass_g > 3000.0;
 ```
 
 To zapytanie oblicza średnią masę ciała (AVG(body_mass_g)) pingwinów z tabeli penguins, gdzie masa ciała jest większa niż 3000,0 gramów (WHERE body_mass_g > 3000.0).
-![venv](20.png)
+![venv](screenshots/20.png)
 
 23. Counting
 
@@ -311,7 +314,7 @@ select
 from penguins;
 ```
 
-![venv](21.png)
+![venv](screenshots/21.png)
 
 24. Exercise
     How many different body masses are in the penguins dataset?
@@ -322,7 +325,7 @@ FROM penguins;
 
 ```
 
-![venv](22.png)
+![venv](screenshots/22.png)
 
 25. Grouping
 
@@ -332,7 +335,7 @@ from penguins
 group by sex;
 ```
 
-![venv](23.png)
+![venv](screenshots/23.png)
 
 26. Exercise
     Explain why the output of the previous query has a blank line before the rows for female and male penguins.
@@ -350,7 +353,7 @@ GROUP BY body_mass_g;
 
 ```
 
-![venv](24.png)
+![venv](screenshots/24.png)
 
 27. Filtering Aggregated Values
 
@@ -363,7 +366,7 @@ group by sex
 having average_mass_g > 4000.0;
 ```
 
-![venv](25.png)
+![venv](screenshots/25.png)
 
 28. Readable Output
 
@@ -376,7 +379,7 @@ group by sex
 having average_mass_g > 4000.0;
 ```
 
-![venv](26.png)
+![venv](screenshots/26.png)
 
 29. Exercise
     Write a query that uses filter to calculate the average body masses of heavy penguins (those over 4500 grams) and light penguins (those under 3500 grams) simultaneously. Is it possible to do this using where instead of filter?
@@ -392,7 +395,7 @@ FROM penguins;
 
 ```
 
-![venv](27.png)
+![venv](screenshots/27.png)
 
 30. Creating In-memory Database
 
@@ -413,7 +416,9 @@ create table work (
 );
 ```
 
-![venv](28.png) 32. Inserting data
+![venv](screenshots/28.png)
+
+32. Inserting data
 
 ```bash
 insert into job values
@@ -428,7 +433,7 @@ insert into work values
 ('tay', 'complain');
 ```
 
-![venv](29.png)
+![venv](screenshots/29.png)
 
 33. Updating Rows
 
@@ -438,7 +443,7 @@ set person = 'tae'
 where person = 'tay';
 ```
 
-![venv](30.png)
+![venv](screenshots/30.png)
 
 34. What happens if you try to delete rows that don’t exist (e.g., all entries in work that refer to juna)?
     Operacja DELETE nie powoduje błędu ani żadnych zmian w bazie danych, jeśli nie ma pasujących wierszy do usunięcia.
@@ -464,15 +469,463 @@ where person = 'tae';
 select * from backup;
 ```
 
-36. Exercise
-    Saving and restoring data as text:
+36. Combining Information
 
-Re-create the notes table in an in-memory database and then use SQLite’s .output and .dump commands to save the database to a file called notes.sql. Inspect the contents of this file: how has your data been stored?
+```bash
+select *
+from work cross join job;
+```
 
-Start a fresh SQLite session and load notes.sql using the .read command. Inspect the database using .schema and select \*: is everything as you expected?
+![venv](screenshots/39.png)
 
-Saving and restoring data in binary format:
+TOOLS
 
-Re-create the notes table in an in-memory database once again and use SQLite’s .backup command to save it to a file called notes.db. Inspect this file using od -c notes.db or a text editor that can handle binary data: how has your data been stored?
+1. Negating Incorrectly
 
-Start a fresh SQLite session and load notes.db using the .restore command. Inspect the database using .schema and select \*: is everything as you expected?
+```bash
+select distinct person
+from work
+where job != 'calibrate';
+```
+
+![venv](screenshots/40.png)
+
+2. Set Membership
+
+```bash
+select *
+from work
+where person not in ('mik', 'tay');
+```
+
+![venv](screenshots/41.png)
+
+3. Subqueries
+
+```bash
+select distinct person
+from work
+where person not in (
+    select distinct person
+    from work
+    where job = 'calibrate'
+);
+```
+
+![venv](screenshots/42.png)
+
+4. Defining a Primary Key
+
+```bash
+create table lab_equipment (
+    size real not null,
+    color text not null,
+    num integer not null,
+    primary key (size, color)
+);
+
+insert into lab_equipment values
+(1.5, 'blue', 2),
+(1.5, 'green', 1),
+(2.5, 'blue', 1);
+
+select * from lab_equipment;
+
+insert into lab_equipment values
+(1.5, 'green', 2);
+```
+
+![venv](screenshots/43.png)
+
+5. Autoincrementing and Primary Keys
+
+```bash
+create table person (
+    ident integer primary key autoincrement,
+    name text not null
+);
+insert into person values
+(null, 'mik'),
+(null, 'po'),
+(null, 'tay');
+select * from person;
+insert into person values (1, 'prevented');
+```
+
+![venv](screenshots/44.png)
+
+6. Creating New Tables from Old
+
+```bash
+create table new_work (
+    person_id integer not null,
+    job_id integer not null,
+    foreign key (person_id) references person (ident),
+    foreign key (job_id) references job (ident)
+);
+
+insert into new_work
+select
+    person.ident as person_id,
+    job.ident as job_id
+from
+    (person inner join work on person.name = work.person)
+    inner join job on job.name = work.job;
+select * from new_work;
+```
+
+![venv](screenshots/45.png)
+
+7. Removing Tables
+
+```bash
+drop table work;
+alter table new_work rename to work;
+CREATE TABLE job (
+    ident integer primary key autoincrement,
+    name text not null,
+    billable real not null
+);
+CREATE TABLE sqlite_sequence(name,seq);
+CREATE TABLE person (
+    ident integer primary key autoincrement,
+    name text not null
+);
+CREATE TABLE IF NOT EXISTS "work" (
+    person_id integer not null,
+    job_id integer not null,
+    foreign key(person_id) references person(ident),
+    foreign key(job_id) references job(ident)
+);
+```
+
+![venv](screenshots/46.png)
+stare tabele zostały skasowane a nowe podmienione
+
+8. Comparing Individual Values to Aggregates
+
+```bash
+select body_mass_g
+from penguins
+where
+    body_mass_g > (
+        select avg(body_mass_g)
+        from penguins
+    )
+limit 5;
+```
+
+![venv](screenshots/47.png)
+
+9. Comparing Individual Values to Aggregates Within Groups
+
+```bash
+select
+    penguins.species,
+    penguins.body_mass_g,
+    round(averaged.avg_mass_g, 1) as avg_mass_g
+from penguins inner join (
+    select
+        species,
+        avg(body_mass_g) as avg_mass_g
+    from penguins
+    group by species
+) as averaged
+    on penguins.species = averaged.species
+where penguins.body_mass_g > averaged.avg_mass_g
+limit 5;
+```
+
+![venv](screenshots/48.png)
+
+10. Common Table Expressions
+
+```bash
+with grouped as (
+    select
+        species,
+        avg(body_mass_g) as avg_mass_g
+    from penguins
+    group by species
+)
+
+select
+    penguins.species,
+    penguins.body_mass_g,
+    round(grouped.avg_mass_g, 1) as avg_mass_g
+from penguins inner join grouped
+where penguins.body_mass_g > grouped.avg_mass_g
+limit 5;
+```
+
+![venv](screenshots/49.png)
+
+11. Conditionals
+
+```bash
+with sized_penguins as (
+    select
+        species,
+        iif(
+            body_mass_g < 3500,
+            'small',
+            'large'
+        ) as size
+    from penguins
+    where body_mass_g is not null
+)
+
+select
+    species,
+    size,
+    count(*) as num
+from sized_penguins
+group by species, size
+order by species, num;
+```
+
+![venv](screenshots/50.png)
+
+12. Selecting a Case
+
+```bash
+with sized_penguins as (
+    select
+        species,
+        case
+            when body_mass_g < 3500 then 'small'
+            when body_mass_g < 5000 then 'medium'
+            else 'large'
+        end as size
+    from penguins
+    where body_mass_g is not null
+)
+
+select
+    species,
+    size,
+    count(*) as num
+from sized_penguins
+group by species, size
+order by species, num;
+```
+
+![venv](screenshots/51.png)
+
+13. Checking a Range
+
+```bash
+with sized_penguins as (
+    select
+        species,
+        case
+            when body_mass_g between 3500 and 5000 then 'normal'
+            else 'abnormal'
+        end as size
+    from penguins
+    where body_mass_g is not null
+)
+
+select
+    species,
+    size,
+    count(*) as num
+from sized_penguins
+group by species, size
+order by species, num;
+```
+
+![venv](screenshots/52.png)
+
+14. Pattern Matching
+
+```bash
+select
+    personal,
+    family
+from staff
+where personal like '%ya%';
+```
+
+![venv](screenshots/53.png)
+
+SKRYPTY PYTHON
+
+1. Quering from python
+
+```bash
+import sqlite3
+import sys
+
+db_path = "db/penguins.db"
+connection = sqlite3.connect(db_path)
+cursor = connection.execute("select count(*) from penguins;")
+rows = cursor.fetchall()
+print(rows)
+```
+
+![venv](screenshots/31.png)
+
+2. Incremental Fetch
+
+```bash
+import sqlite3
+import sys
+
+db_path = "db/penguins.db"
+connection = sqlite3.connect(db_path)
+cursor = connection.cursor()
+cursor = cursor.execute("select species, island from penguins limit 5;")
+while row := cursor.fetchone():
+    print(row)
+```
+
+![venv](screenshots/32.png)
+
+3. Insert, Delete, and All That
+
+```bash
+import sqlite3
+
+connection = sqlite3.connect(":memory:")
+cursor = connection.cursor()
+cursor.execute("create table example(num integer);")
+
+cursor.execute("insert into example values (10), (20);")
+print("after insertion", cursor.execute("select * from example;").fetchall())
+
+cursor.execute("delete from example where num < 15;")
+print("after deletion", cursor.execute("select * from example;").fetchall())
+```
+
+![venv](screenshots/33.png)
+
+4. Interpolating Values
+
+```bash
+import sqlite3
+
+connection = sqlite3.connect(":memory:")
+cursor = connection.cursor()
+cursor.execute("create table example(num integer);")
+
+cursor.executemany("insert into example values (?);", [(10,), (20,)])
+print("after insertion", cursor.execute("select * from example;").fetchall())
+```
+
+![venv](screenshots/34.png)
+
+5. Script Execution
+
+```bash
+import sqlite3
+
+SETUP = """\
+drop table if exists example;
+create table example(num integer);
+insert into example values (10), (20);
+"""
+
+connection = sqlite3.connect(":memory:")
+cursor = connection.cursor()
+cursor.executescript(SETUP)
+print("after insertion", cursor.execute("select * from example;").fetchall())
+```
+
+![venv](screenshots/35.png)
+
+6. SQLite Exceptions in Python
+
+```bash
+import sqlite3
+
+SETUP = """\
+create table example(num integer check(num > 0));
+insert into example values (10);
+insert into example values (-1);
+insert into example values (20);
+"""
+
+connection = sqlite3.connect(":memory:")
+cursor = connection.cursor()
+try:
+    cursor.executescript(SETUP)
+except sqlite3.Error as exc:
+    print(f"SQLite exception: {exc}")
+print("after execution", cursor.execute("select * from example;").fetchall())
+```
+
+![venv](screenshots/36.png)
+
+7. Python in SQLite
+
+```bash
+import sqlite3
+
+SETUP = """\
+create table example(num integer);
+insert into example values (-10), (10), (20), (30);
+"""
+
+
+def clip(value):
+    if value < 0:
+        return 0
+    if value > 20:
+        return 20
+    return value
+
+
+connection = sqlite3.connect(":memory:")
+connection.create_function("clip", 1, clip)
+cursor = connection.cursor()
+cursor.executescript(SETUP)
+for row in cursor.execute("select num, clip(num) from example;").fetchall():
+    print(row)
+```
+
+![venv](screenshots/37.png)
+
+8. Handling Dates and Times
+
+```bash
+from datetime import date
+import sqlite3
+
+
+# Convert date to ISO-formatted string when writing to database
+def _adapt_date_iso(val):
+    return val.isoformat()
+
+
+sqlite3.register_adapter(date, _adapt_date_iso)
+
+
+# Convert ISO-formatted string to date when reading from database
+def _convert_date(val):
+    return date.fromisoformat(val.decode())
+
+
+sqlite3.register_converter("date", _convert_date)
+
+SETUP = """\
+create table events(
+    happened date not null,
+    description text not null
+);
+"""
+
+connection = sqlite3.connect(":memory:", detect_types=sqlite3.PARSE_DECLTYPES)
+cursor = connection.cursor()
+cursor.execute(SETUP)
+
+cursor.executemany(
+    "insert into events values (?, ?);",
+    [(date(2024, 1, 10), "started tutorial"), (date(2024, 1, 29), "finished tutorial")],
+)
+
+for row in cursor.execute("select * from events;").fetchall():
+    print(row)
+```
+
+![venv](screenshots/38.png)
