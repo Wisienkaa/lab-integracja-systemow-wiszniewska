@@ -749,6 +749,343 @@ where personal like '%ya%';
 
 ![venv](screenshots/53.png)
 
+15. Intersection
+
+```bash
+select
+    personal,
+    family,
+    dept,
+    age
+from staff
+where dept = 'mb'
+intersect
+select
+    personal,
+    family,
+    dept,
+    age from staff
+where age < 50;
+```
+
+![venv](screenshots/54.png)
+
+16. Exclusion
+
+```bash
+select
+    personal,
+    family,
+    dept,
+    age
+from staff
+where dept = 'mb'
+except
+    select
+        personal,
+        family,
+        dept,
+        age from staff
+    where age < 50;
+```
+
+![venv](screenshots/55.png)
+
+17. Random Numbers and Why Not
+
+```bash
+with decorated as (
+    select random() as rand,
+    personal || ' ' || family as name
+    from staff
+)
+
+select
+    rand,
+    abs(rand) % 10 as selector,
+    name
+from decorated
+where selector < 5;
+```
+
+![venv](screenshots/56.png)
+
+18. Creating an Index
+
+```bash
+explain query plan
+select filename
+from plate
+where filename like '%07%';
+
+create index plate_file on plate(filename);
+
+explain query plan
+select filename
+from plate
+where filename like '%07%';
+```
+
+![venv](screenshots/57.png)
+
+19. Self join
+
+```bash
+with person as (
+    select
+        ident,
+        personal || ' ' || family as name
+    from staff
+)
+
+select
+    left_person.name,
+    right_person.name
+from person as left_person inner join person as right_person
+limit 10;
+```
+
+![venv](screenshots/58.png)
+
+20. Generating Unique Pairs
+
+```bash
+with person as (
+    select
+        ident,
+        personal || ' ' || family as name
+    from staff
+)
+
+select
+    left_person.name,
+    right_person.name
+from person as left_person inner join person as right_person
+on left_person.ident < right_person.ident
+where left_person.ident <= 4 and right_person.ident <= 4
+```
+
+![venv](screenshots/59.png)
+
+21. Filtering Pairs
+
+```bash
+with
+person as (
+    select
+        ident,
+        personal || ' ' || family as name
+    from staff
+),
+
+together as (
+    select
+        left_perf.staff as left_staff,
+        right_perf.staff as right_staff
+    from performed as left_perf inner join performed as right_perf
+        on left_perf.experiment = right_perf.experiment
+    where left_staff < right_staff
+)
+
+select
+    left_person.name as person_1,
+    right_person.name as person_2
+from person as left_person inner join person as right_person join together
+    on left_person.ident = left_staff and right_person.ident = right_staff;
+```
+
+![venv](screenshots/60.png)
+
+22. Existence and Correlated Subqueries
+
+```bash
+select
+    name,
+    building
+from department
+where
+    exists (
+        select 1
+        from staff
+        where dept = department.ident
+    )
+order by name;
+```
+
+![venv](screenshots/61.png)
+
+23. Nonexistence
+
+```bash
+select
+    name,
+    building
+from department
+where
+    not exists (
+        select 1
+        from staff
+        where dept = department.ident
+    )
+order by name;
+```
+
+![venv](screenshots/62.png)
+
+24. Avoiding Correlated Subqueries
+
+```bash
+select distinct
+    department.name as name,
+    department.building as building
+from department inner join staff
+    on department.ident = staff.dept
+order by name;;
+```
+
+![venv](screenshots/63.png)
+
+25. Lead and Lag
+
+```bash
+with ym_num as (
+    select
+        strftime('%Y-%m', started) as ym,
+        count(*) as num
+    from experiment
+    group by ym
+)
+
+select
+    ym,
+    lag(num) over (order by ym) as prev_num,
+    num,
+    lead(num) over (order by ym) as next_num
+from ym_num
+order by ym;
+```
+
+![venv](screenshots/64.png) 26. Windowing Functions
+
+```bash
+with ym_num as (
+    select
+        strftime('%Y-%m', started) as ym,
+        count(*) as num
+    from experiment
+    group by ym
+)
+
+select
+    ym,
+    num,
+    sum(num) over (order by ym) as num_done,
+    (sum(num) over (order by ym) * 1.00) / (select sum(num) from ym_num) as completed_progress,
+    cume_dist() over (order by ym) as linear_progress
+from ym_num
+order by ym;
+```
+
+![venv](screenshots/65.png)
+
+27. Explaining Another Query Plan
+
+```bash
+explain query plan
+with ym_num as (
+    select
+        strftime('%Y-%m', started) as ym,
+        count(*) as num
+    from experiment
+    group by ym
+)
+select
+    ym,
+    num,
+    sum(num) over (order by ym) as num_done,
+    cume_dist() over (order by ym) as progress
+from ym_num
+order by ym;
+```
+
+![venv](screenshots/66.png)
+
+28. Partitioned Windows
+
+```bash
+with y_m_num as (
+    select
+        strftime('%Y', started) as year,
+        strftime('%m', started) as month,
+        count(*) as num
+    from experiment
+    group by year, month
+)
+
+select
+    year,
+    month,
+    num,
+    sum(num) over (partition by year order by month) as num_done
+from y_m_num
+order by year, month;
+```
+
+![venv](screenshots/67.png)
+
+ADVANCED FEATURES
+
+1. Blobs
+
+```bash
+create table images (
+    name text not null,
+    content blob
+);
+
+insert into images (name, content) values
+('biohazard', readfile('img/biohazard.png')),
+('crush', readfile('img/crush.png')),
+('fire', readfile('img/fire.png')),
+('radioactive', readfile('img/radioactive.png')),
+('tripping', readfile('img/tripping.png'));
+
+select
+    name,
+    length(content)
+from images;
+```
+
+2. Refreshing the Penguins Database
+
+```bash
+select
+    species,
+    count(*) as num
+from penguins
+group by species;
+```
+
+![venv](screenshots/68.png)
+
+3. Tombstones
+
+```bash
+alter table penguins
+add active integer not null default 1;
+
+update penguins
+set active = iif(species = 'Adelie', 0, 1);
+select
+    species,
+    count(*) as num
+from penguins
+where active
+group by species;
+```
+
+![venv](screenshots/69.png)
+
 SKRYPTY PYTHON
 
 1. Quering from python
