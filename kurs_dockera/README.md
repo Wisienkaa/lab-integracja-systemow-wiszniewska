@@ -418,3 +418,172 @@ Wynikowo daje to nam:
 ```
 
 13. Docker Networks: wirtualne sieci w kontenerach
+
+```bash
+docker run -dit --name contA busybox #Uruchomienie kontenera contA w tle (detached mode)
+docker run -dit --name contB busybox
+docker network inspect bridge
+docker attach contA
+docker stop contA contB #Zatrzymanie kontenerów contA i contB
+docker rm contA contB
+docker network create --driver bridge moja-siec #Tworzy nową sieć o nazwie moja-siec używając sterownika typu bridge
+docker run -dit --name contC --network moja-siec busybox #Uruchomienie kontenera contC w tle (detached mode) i podłączenie go do sieci moja-siec
+```
+
+docker network inspect bridge
+Wyświetla szczegółowe informacje o sieci bridge, w tym listę podłączonych kontenerów, konfigurację IP i inne ustawienia sieciowe.
+
+docker attach contA
+Łączy terminal użytkownika z aktywną sesją kontenera contA, umożliwiając interakcję z procesami uruchomionymi w kontenerze.
+
+14. Sieci - łączenie kontenerów
+
+```bash
+docker network create baza=-net
+docker run --name baza -v dane_bazy:/var/lib/postgresql/data -e POSTGRES_DB=mojabaza -e POSTGRES_USER=ja -e POSTGRES_PASSWORD=mojehaslo --network baza-net --detach postgres
+docker run  -p 8080:8080 --network baza-net adminer
+```
+
+docker run: Uruchamia nowy kontener.
+--name baza: Nadaje kontenerowi nazwę baza.
+-v dane_bazy:/var/lib/postgresql/data: Mapuje wolumen nazwany dane_bazy do ścieżki /var/lib/postgresql/data w kontenerze, co pozwala na trwałe przechowywanie danych bazy danych.
+-e POSTGRES_DB=mojabaza: Ustawia zmienną środowiskową POSTGRES_DB, co powoduje, że PostgreSQL utworzy bazę danych o nazwie mojabaza.
+-e POSTGRES_USER=ja: Ustawia zmienną środowiskową POSTGRES_USER, co tworzy użytkownika PostgreSQL o nazwie ja.
+-e POSTGRES_PASSWORD=mojehaslo: Ustawia zmienną środowiskową POSTGRES_PASSWORD, co ustawia hasło dla użytkownika PostgreSQL na mojehaslo.
+--network baza-net: Podłącza kontener do wcześniej utworzonej sieci baza-net.
+--detach: Uruchamia kontener w tle (detached mode).
+postgres: Używa obrazu PostgreSQL.
+-p 8080:8080: Mapuje port 8080 na hoście do portu 8080 w kontenerze, umożliwiając dostęp do aplikacji Adminer przez http://localhost:8080.
+
+15. Docker compose
+
+```bash
+vim docker-compose.yml
+```
+
+```bash
+version: '3'
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: mojabaza
+      POSTGRES_USER: ja
+      POSTGRES_PASSWORD: mojehaslo
+    volumes:
+      - dane_bazy:/var/lib/postgresql/data
+  web:
+    image: adminer
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+volumes:
+  dane_bazy:
+```
+
+Umożliwia definiowanie usług, sieci i wolumenów w jednym pliku docker-compose.yml.
+Można uruchamiać, zatrzymywać i zarządzać wszystkimi usługami zdefiniowanymi w docker-compose.yml za pomocą jednej komendy.
+
+docker-compose up: Uruchamia wszystkie usługi zdefiniowane w pliku docker-compose.yml.
+docker-compose down: Zatrzymuje i usuwa wszystkie usługi oraz sieci i wolumeny zdefiniowane w pliku docker-compose.yml.
+docker-compose ps: Wyświetla status uruchomionych usług.
+docker-compose logs: Wyświetla logi z wszystkich usług.
+
+16. Django i docker compose
+    Dockerfile, który tworzy obraz aplikacji
+
+```bash
+FROM python:3.8
+WORKDIR app
+RUN pip install Django gunicorn psycopg2
+COPY mysite .
+CMD funicorn --bind=0.0.0.0:8080 mysite.wsgi
+```
+
+Tworzenie obrazu
+
+```bash
+docker build -t django_app .
+docker run -p 8082:8080
+```
+
+W docker compose dodajemy
+
+```bash
+django_app:
+    build: ./django_app
+    image: django_img
+    networks:
+        - baza-net
+    ports:
+        - 8080:8080
+    depends_on:
+        -baza
+```
+
+Budowanie docker file
+
+```bash
+docker-copmpose up --build
+```
+
+17. NGINX
+    NGINX może pełnić rolę serwera HTTP, obsługując statyczne strony internetowe, pliki multimedialne, oraz dynamiczne aplikacje webowe
+
+```bash
+django_app:
+    build: ./django_app
+    image: django_img
+    networks:
+        - baza-net
+    ports:
+        - 8080:8080
+    depends_on:
+        -baza
+gateway:
+    image: nginx
+    volumes:
+        - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+        my_app
+    networks:
+        - app-net
+    ports:
+        - 7070:8080
+volumes:
+    dane_bazy:
+networks:
+    baza-net:
+    app-net:
+```
+
+```bash
+ls django_app docker-compose.yml nginx.conf
+set COMPOSE_CONVERT_WINDOWS_PATHS=1
+```
+
+18. Multi-Stage build
+    Multi-stage build to technika używana w Dockerze, która pozwala na tworzenie lekkich i zoptymalizowanych obrazów kontenerów poprzez wykorzystanie wielu etapów budowania w jednym Dockerfile
+
+```bash
+FROM golang:1.16 AS builder
+WORKDIR /app
+COPY . .
+RUN go build -o myapp
+
+FROM alpine:latest
+WORKDIR /root/
+COPY --from=builder /app/myapp .
+CMD ["./myapp"]
+
+```
+
+FROM golang:1.16 AS builder: Używamy oficjalnego obrazu Go do kompilacji naszej aplikacji. Nadajemy temu etapowi nazwę builder.
+WORKDIR /app: Ustawiamy katalog roboczy na /app.
+COPY . .: Kopiujemy wszystkie pliki z bieżącego katalogu na hosta do katalogu roboczego w kontenerze.
+RUN go build -o myapp: Kompilujemy aplikację Go, tworząc plik binarny myapp.
+FROM alpine:latest: Używamy lekkiego obrazu Alpine jako podstawy dla naszego finalnego obrazu.
+WORKDIR /root/: Ustawiamy katalog roboczy na /root/.
+COPY --from=builder /app/myapp .: Kopiujemy skompilowaną binarkę myapp z etapu builder do bieżącego katalogu roboczego (/root/) w finalnym obrazie.
+CMD ["./myapp"]: Definiujemy polecenie, które ma zostać wykonane po uruchomieniu kontenera.
