@@ -385,7 +385,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return 'Twoje Imię i Nazwisko'
+    return 'Monika W'
 
 if __name__ == '__main__':
     app.run(debug=True)
@@ -417,7 +417,7 @@ def post_list(request):
     return render(request, 'blog/post_list.html', {})
 
 def my_name(request):
-    return HttpResponse('Jan Kowalski')
+    return HttpResponse('Monika W')
 
 def add_numbers(request):
     if request.method == 'POST':
