@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  python-service:
+    build: .
+    container_name: python-script-container
+    volumes:
+      - ./code:/app/code
+    command: python script.py
+    networks:
+      - my_bridge_network
+
+  db:
+    image: mysql:5.7
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: testdb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    networks:
+      - my_bridge_network
+
+networks:
+  my_bridge_network:
+    driver: bridge

@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  python-service:
+    build: .
+    container_name: python-script-container
+    volumes:
+      - ./code:/app/code
+    command: python script.py
