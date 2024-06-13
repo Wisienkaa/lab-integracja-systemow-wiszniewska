@@ -1,4 +1,7 @@
 # lab-integracja-systemow-wiszniewska
-Wykonane laboratorium nr 1
 
-README do lab2 znajduje się w folderze utils
+Projekty
+
+MyKotlinApp - https://docs.google.com/document/d/1orTvSB1HaKbTzuLdgOlClXMaJAAsay6Y27jn59ELWEg/edit?usp=sharing
+
+AMW-prime - https://docs.google.com/document/d/1jNHfdjDAjrsfaaXJ9B3Nzy9WB-pZySQQMVkW9neopas/edit?usp=sharing
