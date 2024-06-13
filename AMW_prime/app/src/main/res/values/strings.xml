@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">AMW_prime</string>
+    <string name="powitanie_1">Witaj w aplikacji promującej Akademię Marynarki Wojennej!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="contact_details">Akademia Marynarki Wojennej\nim. Bohaterów Westerplatte\n81-127 Gdynia\nul. Śmidowicza 69\n\ntel./fax: 261 26 25 20</string>
+    <string name="send">Wyślij</string>
+    <string name="accept">Akceptuję klauzulę informacyjną</string>
+    <string name="repeat_password">Powtórz hasło</string>
+    <string name="password">Hasło</string>
+    <string name="e_mail">E-mail</string>
+    <string name="surname">Nazwisko</string>
+    <string name="name">Imię</string>
+    <string name="amw_info">Akademia Marynarki Wojennej im. Bohaterów Westerplatte kształci kandydatów na żołnierzy zawodowych oraz studentów cywilnych z kraju i zagranicy. 100 lat tradycji, historii i wychowania na wartościach patriotycznych z nowoczesną bazą dydaktyczną i zapleczem wykwalifikowanej kadry akademickiej daje możliwości kształcenia najlepiej przygotowanych do służby oficerów MW.\n\nAkademia Marynarki Wojennej jest kontynuatorką utworzonej w 1922 r. w Toruniu Oficerskiej Szkoły Marynarki Wojennej. Akademia realizuje misję o doniosłym znaczeniu dla państwa i narodu, wnosząc kluczowy wkład w obronność, bezpieczeństwo, w szczególności bezpieczeństwo morskie państwa, wychowując podchorążych, studentów i doktorantów, kształcąc ich zgodnie z wartościami wyrażonymi w hasłach: „Morze, Ojczyzna, Obowiązek” oraz „Amor Patriae Suprema Lex”.</string>
+    <string name="amw_start">Akademia Marynarki Wojennej - „Morze, Ojczyzna, Obowiązek”</string>
+
+    <!-- Opis Wydziału Mechaniczno-Elektrycznego -->
+    <string name="opis_wydzial_mechaniczno_elektryczny">
+        Wydział Mechaniczno-Elektryczny jest spadkobiercą tradycji i kontynuatorem procesu kształcenia realizowanego od 1931 r. przez Wydział Techniczny Szkoły Podchorążych Marynarki Wojennej. W całej naszej wspaniałej historii zapewniał wykształcenie na najwyższym poziomie dla przyszłych oficerów Wojska Polskiego oraz nadziei naszej gospodarki – przyszłych inżynierów.\n\n
+        W czasie wojny Uczelnię przeniesiono do Plymouth (Wielka Brytania). Następnie proces kształcenia był realizowany w Oficerskiej Szkole Marynarki Wojennej (1946-1955) i w Wyższej Szkole Marynarki Wojennej w Gdyni (1955-1987). W 1976 r. Wydział Techniczny zmienił nazwę na Wydział Mechaniczno-Elektryczny i tą nazwę pozostawiono powołując w 1987 r. Akademię Marynarki Wojennej (na mocy ustawy o wyższym szkolnictwie wojskowym).
+    </string>
+
+    <!-- Opis Wydziału Nawigacji i Uzbrojenia Okrętowego -->
+    <string name="opis_wydzial_nawigacji">
+        Wydział Nawigacji i Uzbrojenia Okrętowego to główny ośrodek przygotowujący kadry dla Marynarki Wojennej RP w zakresie tzw. morskich specjalności pokładowych. Jest też jednym z trzech ośrodków w kraju kształcących kadry dla potrzeb marynarki handlowej, do pracy w administracji morskiej oraz w innych instytucjach administracji państwowej i samorządowej związanych z gospodarką morską.
+    </string>
+
+    <!-- Opis Wydziału Nauk Humanistycznych i Społecznych -->
+    <string name="opis_wydzial_humanistyczny">
+        Wydział Nauk Humanistycznych i Społecznych kontynuuje działalność Instytutu Nauk Społecznych AMW oraz jednostek organizacyjnych, które go poprzedzały. Został utworzony w 2008 roku na mocy Decyzji Ministra Obrony Narodowej nr 218/MON z dnia 6 maja 2008 r. W 2018 roku Wydział świętował swoje 10-lecie.
+    </string>
+
+    <!-- Opis Wydziału Dowodzenia i Operacji Morskich -->
+    <string name="opis_wydzial_dowodzenia">
+        Wydział Dowodzenia i Operacji Morskich od 1975 r. jest kontynuatorem działalności dydaktyczno-wychowawczej, naukowo badawczej oraz administracyjno-służbowej dla potrzeb Marynarki Wojennej, resortu Obrony Narodowej i gospodarki morskiej.
+    </string>
+</resources>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="16dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/amw_logo"
+        android:visibility="invisible"
+        android:animateLayoutChanges="true"
+        android:alpha="0.0"
+        android:animation="@anim/fade_in" />
+
+
+    <TextView
+        android:id="@+id/contactDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Akademia Marynarki Wojennej\nim. Bohaterów Westerplatte\n81-127 Gdynia\nul. Śmidowicza 69\n\ntel./fax: 261 26 25 20"
+        android:textSize="18sp"
+        android:layout_marginTop="20dp"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:background="@color/light_blue"
+        />
+
+
+    <Button
+        android:layout_marginTop="18dp"
+        android:id="@+id/contactEmailButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kontakt mailowy"
+        android:backgroundTint="@color/blue"
+        android:backgroundTintMode="add"/>
+    </LinearLayout>
