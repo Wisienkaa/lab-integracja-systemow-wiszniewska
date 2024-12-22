@@ -109,3 +109,53 @@ $ docker ps -a
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 $
 ```
+
+Exercise 2: Changing images
+First start the container with /bin/bash:
+Try running ping in the terminal.
+
+```bash
+$ C:\Docker-training> docker run -it ubuntu:16.04 /bin/bash
+root@8b559ea51a87:/# ping google.com
+bash: ping: command not found
+root@8b559ea51a87:/#
+```
+
+The command doesn't exist. The Ubuntu image for Docker only has the bare minimum of software installed to operate the container. That's okay though: we can install the ping command.
+
+![venv](2.1.png)
+
+In Debian-based Linux environments (such as Ubuntu), you can install new software using the apt package manager. For those who have experience with Macs, this program is the equivalent of homebrew.
+By default, to reduce the image size, the Ubuntu image doesn't have a list of the available software packages. We need to update the list of available software:
+
+```bash
+$ apt-get update
+```
+
+![venv](2.2.png)
+
+Call apt-get install iputils-ping to install the package containing ping
+
+```bash
+$ apt-get install iputils-ping
+```
+
+Ping your favorite website. When you've seen enough, Ctrl+C to interrupt, then exit the container.
+
+```bash
+$ ping google.com
+```
+
+![venv](2.3.png)
+
+Committing changes
+Pass the container ID, an author, commit message, and give it the name <DockerHub username>/ping:
+
+```bash
+$ docker commit -a 'David Elner' -m 'Added ping utility.' 786 delner/ping
+docker images
+```
+
+![venv](2.4.png)
+
+![venv](2.5.png)
