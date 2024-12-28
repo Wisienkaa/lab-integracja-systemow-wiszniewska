@@ -59,135 +59,249 @@ docker run uruchamia kontener z obrazu.
 
 Kolejne uruchomienia wykorzystują już pobrany obraz.
 Zarządzanie kontenerami:
+
 docker ps wyświetla listę uruchomionych kontenerów.
+
 docker ps -a wyświetla wszystkie kontenery (aktywne i zakończone).
+
 docker stop zatrzymuje działający kontener (użyj ID kontenera lub jego nazwy).
+
 docker rm usuwa zatrzymany kontener.
+
 Zarządzanie obrazami:
+
 docker images pokazuje dostępne obrazy na hoście.
+
 docker rmi usuwa obraz (należy najpierw zatrzymać i usunąć kontenery używające tego obrazu).
+
 docker pull pobiera obraz bez jego uruchamiania.
+
 Kontenery a maszyny wirtualne:
+
 Kontenery uruchamiają specyficzny proces lub zadanie.
+
 Po zakończeniu zadania kontener automatycznie się wyłącza.
+
 Przykład: docker run ubuntu uruchamia kontener, który natychmiast się zatrzymuje, ponieważ nie ma żadnego procesu do uruchomienia.
+
 Uruchamianie procesów wewnątrz kontenera:
+
 Można uruchomić proces wewnątrz kontenera np. docker run ubuntu sleep 5 uruchamia kontener i proces sleep na 5 sekund.
+
 docker exec pozwala uruchomić komendę w działającym kontenerze (np. docker exec <container-id> cat /etc/hosts wyświetla zawartość pliku /etc/hosts w kontenerze).
+
 Uruchamianie aplikacji webowych:
+
 docker run kodecloud/simpleweb-app uruchamia serwer webowy na porcie 8080.
+
 Domyślnie uruchamia się w trybie "attached" – widzisz wyniki na konsoli.
+
 Można uruchomić kontener w tle za pomocą opcji -d (tryb "detached").
+
 Aby powrócić do kontenera działającego w tle, użyj docker attach.
+
 Identyfikacja kontenerów:
+
 Identyfikatory kontenerów mogą być skracane do pierwszych kilku znaków (np. docker attach a043d).
+
 Uruchamianie kontenera Docker
+
 Polecenie: docker run <nazwa-obrazu>
+
 Zastosowanie: Uruchamia kontener z określonym obrazem.
+
 Przykład:
+
 Aby uruchomić CentOS:
+
 Najpierw pobierz obraz: docker pull centos
+
 Następnie uruchom: docker run centos
+
 Źródło obrazów: Oficjalne obrazy można znaleźć na stronie Docker Hub.
 
 Uruchamianie poleceń w kontenerze
+
 Interaktywne logowanie: Użyj -it, aby uruchomić polecenie i zalogować się bezpośrednio.
+
 Przykład: docker run -it centos bash (uruchamia powłokę bash w kontenerze).
+
 Sprawdzanie systemu operacyjnego
+
 Polecenie do weryfikacji systemu: cat /etc/\*release
+
 Uruchamianie kontenerów w tle
+
 Polecenie: docker run -d <nazwa-obrazu> <polecenie>
+
 Przykład: docker run -d centos sleep 20 (uruchamia kontener CentOS, który śpi przez 20 sekund w tle).
+
 Wyświetlanie wszystkich kontenerów (w tym zakończonych)
+
 Polecenie: docker ps -a
+
 Funkcja: Wyświetla wszystkie kontenery, w tym te, które zakończyły działanie.
+
 Zatrzymywanie kontenera
+
 Polecenie: docker stop <id lub nazwa-kontenera>
+
 Przykład: docker stop serene_pasteur
+
 Usuwanie kontenerów
+
 Polecenie: docker rm <id lub nazwa-kontenera>
+
 Zastosowanie: Oczyszcza zakończone kontenery, aby odzyskać miejsce na dysku.
+
 Usuwanie wielu kontenerów: Można podać wiele identyfikatorów/nazw w jednym poleceniu (np. docker rm <id1> <id2>).
+
 Wyświetlanie obrazów Docker
+
 Polecenie: docker images
+
 Funkcja: Wyświetla wszystkie dostępne lokalnie obrazy.
+
 Usuwanie obrazów Docker
+
 Polecenie: docker rmi <nazwa-obrazu>
+
 Zastosowanie: Usuwa wskazane obrazy Docker.
+
 Zależności: Nie można usunąć obrazu, jeśli kontenery są od niego zależne; najpierw należy usunąć kontenery.
+
 Usuwanie obrazów
+
 Polecenie: docker rmi <nazwa-obrazu>
+
 Przykład: Aby usunąć obraz hello-world, wykonaj:
+
 docker rmi hello-world
+
 Stan: żadne kontenery nie są uruchomione przed próbą usunięcia obrazów.
+
 Pobieranie obrazów Docker
+
 Polecenie: docker pull <nazwa-obrazu>
+
 Zastosowanie: Pobiera obraz z Docker Hub bez jego uruchamiania.
+
 Przykład: Aby pobrać obraz Ubuntu:
+
 docker pull ubuntu
+
 Przechowywanie lokalne: Po pobraniu obraz będzie dostępny lokalnie, co można potwierdzić poleceniem docker images.
+
 Uruchamianie kontenera w tle
+
 Polecenie: docker run -d <nazwa-obrazu>
+
 Przykład: Aby uruchomić kontener Ubuntu w tle przez 100 sekund:
+
 docker run -d ubuntu sleep 100
 
     Polecenie: docker exec <id-kontenera> <polecenie>
 
 Zastosowanie: Wykonuje polecenie wewnątrz już działającego kontenera.
+
 Przykład: Aby sprawdzić wersję systemu operacyjnego w działającym kontenerze Ubuntu:
+
 Najpierw zidentyfikuj id kontenera z docker ps.
+
 Następnie uruchom: docker exec <id-kontenera> cat /etc/\*release
+
 Funkcjonalność: To polecenie umożliwia interakcję z systemem plików i procesami wewnątrz kontenera.
+
 Hands-on Lab: Basic Docker Commands - ćwiczenia
+
 https://kodekloud.com/pages/free-labs/docker/docker-basic-commands
+
 What is the version of Docker Server Engine running on the Host?
 ![venv](p/1.2.png)
+
 How many containers are running on this host?
 ![venv](p/1.3.png)
+
 How many images are available on this host?
 ![venv](p/1.4.png)
+
 Run a container using the redis image
 ![venv](p/1.5.png)
+
 Stop the container you just created
 ![venv](p/1.6.png)
+
 How many containers are PRESENT on the host now?
+
 Including both Running and Not Running ones
 ![venv](p/1.7.png)
 
 Wykonałam testy, wynik: 15/17
+
 Zadanie na ocenę:
+
 Which Docker command is used to list all running containers
+
 docker ps
+
 Pytanie 2
+
 What does the 'docker rm' command do?
+
 Removes a Docker container
+
 Pytanie 3
+
 Which of the following Docker commands are related to managing containers?
+
 docker run
 docker stop
 Pytanie 4
+
 What is the role of the 'docker pull' command?
+
 To download a Docker image from a registry
+
 Pytanie 5
+
 What is the Docker command to remove a Docker container?
+
 Please answer in all lowercase.
+
 docker rm
+
 Pytanie 6
+
 What does the 'docker run' command do?
+
 It runs a Docker container from an image
+
 Pytanie 7
+
 Which command would you use to run a command inside a running Docker container?
+
 docker exec
+
 Pytanie 8
+
 Which of the following Docker commands can be used for managing Docker images?
+
 docker pull
+
 docker rmi
+
 docker images
+
 Pytanie 9
+
 What Docker command is used to stop a running container? Please answer in all lowercase.
+
 docker stop
+
 Pytanie 10
+
 Which of the following Docker commands require an image name or ID?
+
 docker rmi
 docker stop
 ​​​​​​​docker pull
