@@ -1,0 +1,159 @@
+<style>
+/* Ogólny styl dla widoku sprintów */
+h1 {
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color:  !important; /* Wymuszamy czarny kolor tekstu na przyciskach */
+  transition: background-color 0.3s ease, text-decoration 0.3s ease;
+}
+
+/* Przyciski Nowy sprint i Edytuj */
+.btn-primary,
+.btn-secondary {
+  background-color: #628db6; /* Kolor tła */
+  color: #f8f8f8 !important; /* Czarny tekst */
+  border: 1px solid #628db6; /* Dopasowanie koloru ramki */
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+  background-color: #628db6; /* Kolor tła nie zmienia się */
+  color: #f8f8f8 !important; /* Kolor tekstu na czarny */
+  text-decoration: underline; /* Podkreślenie tekstu przy najechaniu */
+}
+
+/* Przyciski Usuń */
+.btn-danger {
+  background-color: #d8727b;
+  color: #f8f8f8 !important; /* Czarny tekst */
+  border: 1px solid #cd5460;
+}
+
+.btn-danger:hover {
+  background-color: #d8727b; /* Kolor tła nie zmienia się */
+  color: #f8f8f8 !important; /* Kolor tekstu na czarny */
+  text-decoration: underline; /* Podkreślenie tekstu przy najechaniu */
+}
+
+/* Styl listy sprintów */
+.sprint-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.sprint-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: auto;
+  transition: box-shadow 0.3s ease;
+}
+
+.sprint-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Zwiększenie cienia bez przesuwania */
+}
+
+.sprint-card-header h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #007BFF;
+}
+
+.sprint-link {
+  text-decoration: none;
+  color: #007BFF;
+  transition: color 0.3s ease;
+}
+
+.sprint-link:hover {
+  text-decoration: underline;
+  color: #0056b3;
+}
+
+.sprint-card-body {
+  margin-top: 10px;
+  font-size: 1em;
+}
+
+.sprint-dates {
+  font-size: 0.9em;
+  color: #555;
+  margin: 10px 0;
+}
+
+.sprint-dates strong {
+  color: #333;
+}
+
+.sprint-card-footer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .sprint-card {
+    padding: 15px;
+  }
+
+  .sprint-card-header h3 {
+    font-size: 1.3em;
+  }
+
+  .sprint-dates {
+    font-size: 0.8em;
+  }
+
+  .btn {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+}
+
+</style>
+
+<h1>Tabela sprintów</h1>
+
+<%= link_to 'Nowy sprint', new_sprint_path, class: 'btn btn-primary mb-4' %>
+
+<div class="sprint-list">
+  <% @sprints.each do |sprint| %>
+    <div class="sprint-card">
+      <div class="sprint-card-header">
+        <h3><%= link_to sprint.name, sprint_path(sprint), class: 'sprint-link' %></h3>
+      </div>
+      <div class="sprint-card-body">
+        <p class="sprint-dates">
+          <strong>Start:</strong> <%= sprint.start_date.strftime("%B %d, %Y") %> |
+          <strong>Koniec:</strong> <%= sprint.due_date.strftime("%B %d, %Y") %>
+        </p>
+      </div>
+      <div class="sprint-card-footer">
+        <%= link_to 'Edytuj', edit_sprint_path(sprint), class: 'btn btn-secondary' %> |
+        <%= link_to 'Usuń', sprint_path(sprint), method: :delete, data: { confirm: 'Czy na pewno chcesz usunąć ten sprint?' }, class: 'btn btn-danger' %>
+      </div>
+    </div>
+  <% end %>
+</div>

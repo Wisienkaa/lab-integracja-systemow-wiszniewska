@@ -1,0 +1,57 @@
+<%= stylesheet_link_tag '/plugin_assets/redmine_risk_management/stylesheets/sprint_management.css' %>
+<%= stylesheet_link_tag 'plugins/redmine_risk_management/stylesheets/sprint_management.css' %>
+
+<%= form_for @sprint, html: { class: 'sprint-form' } do |f| %>
+  <!-- Sprawdzenie błędów -->
+  <% if @sprint.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sprint.errors.count, "error") %> prohibited this sprint from being saved:</h2>
+      <ul>
+        <% @sprint.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!-- Nagłówek formularza -->
+  <h2 class="sprint-form-header">Tworzenie Nowego Sprintu</h2>
+
+  <!-- Pole nazwy sprintu -->
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <!-- Pole daty rozpoczęcia -->
+  <div class="field">
+    <%= f.label :start_date %>
+    <%= f.date_select :start_date %>
+  </div>
+
+  <!-- Pole daty zakończenia -->
+  <div class="field">
+    <%= f.label :due_date %>
+    <%= f.date_select :due_date %>
+  </div>
+
+  <!-- Wybór projektów -->
+  <div class="field">
+    <%= f.label :projects %>
+    <div class="checkboxes">
+      <%= f.collection_check_boxes :project_ids, Project.all, :id, :name do |b| %>
+        <div>
+          <%= b.check_box %>
+          <%= b.label %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Przycisk zapisu -->
+  <div class="actions">
+    <%= f.submit 'Zapisz Sprint' %>
+  </div>
+<% end %>
+
+<%= link_to 'Powrót do tabeli Sprint', sprints_path %>

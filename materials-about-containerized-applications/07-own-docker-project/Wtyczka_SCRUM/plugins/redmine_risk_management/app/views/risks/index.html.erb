@@ -1,0 +1,34 @@
+<%= stylesheet_link_tag 'risk_management', plugin: 'redmine_risk_management' %>
+
+<h2>
+  <strong>Backlog Ryzyk dla projektu:</strong> 
+  <span class="project-id-name">#<%= @project.id %> <%= @project.name %></span>
+</h2>
+
+<% if @project %>
+  <%= link_to 'Nowe Ryzyko', new_project_risk_path(@project) %>
+<% else %>
+  <p>Nie możesz utworzyć nowego ryzyka bez wybranego projektu.</p>
+<% end %>
+
+<div class="risks-grid">
+  <% @risks.each do |risk| %>
+    <% project = risk.project %>
+    <div class="risk-card">
+      <h3>
+        <strong><%= risk.title %></strong> 
+        (<span>#<%= project.id %> - <%= project.name %></span>)
+      </h3>
+      <p><strong>Prawdopodobieństwo:</strong> <%= risk.likelihood %>, <strong>Wpływ:</strong> <%= risk.impact %></p>
+      <p><strong>Osoba odpowiedzialna:</strong> <%= risk.assignee&.name || "Brak przypisanej osoby" %></p>
+      <p><strong>Kategoria:</strong> <%= risk.category %></p>
+      <p><strong>Status:</strong> <%= risk.status %></p>
+      <p><strong>Reakcja:</strong> <%= risk.response %></p>
+      <p class="description"><%= risk.description %></p>
+      <%= link_to 'Szczegóły', project_risk_path(project, risk) %>
+
+      <!-- Link do usunięcia ryzyka -->
+      <%= link_to 'Usuń', project_risk_path(project, risk), method: :delete, data: { confirm: 'Czy na pewno chcesz usunąć to ryzyko?' }, class: 'delete-risk-link' %>
+    </div>
+  <% end %>
+</div>

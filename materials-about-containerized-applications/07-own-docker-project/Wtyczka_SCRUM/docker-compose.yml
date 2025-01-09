@@ -1,0 +1,28 @@
+
+services:
+  web:
+    build: .
+    command: bundle exec rails server -b 0.0.0.0
+    volumes:
+      - .:/usr/src/app
+    environment:
+      DATABASE_URL: postgres://redmine:mysecretpassword@db/redmine_development
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+
+  db:
+    image: postgres:latest
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: redmine_development
+      POSTGRES_USER: redmine
+      POSTGRES_PASSWORD: mysecretpassword
+
+volumes:
+  pgdata:

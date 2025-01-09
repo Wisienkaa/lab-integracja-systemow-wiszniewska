@@ -1,0 +1,25 @@
+<%= stylesheet_link_tag 'project_management', plugin: 'redmine_risk_management' %>
+<div class="project-details-container">
+  <h1 class="project-header">#<%= @project.id %> <%= @project.name %> - Szczegóły projektu</h1>
+
+  <div class="project-details">
+    <p><strong>Opis:</strong> <%= @project.description.presence || 'Brak' %></p>
+    <p><strong>Data rozpoczęcia:</strong> <%= @project.read_attribute(:start_date) || 'Brak' %></p>
+    <p><strong>Data zakończenia:</strong> <%= @project.read_attribute(:due_date) || 'Brak' %></p>
+    <p><strong>Szacowany czas:</strong> <%= @project.estimated_time || 'Brak' %> godzin</p>
+    <p>
+      <strong>Priorytet:</strong>
+      <span class="project-priority <%= @project.priority.to_s.downcase %>">
+        <%= @project.priority || 'Normalny' %>
+      </span>
+    </p>
+    <p><strong>Autor:</strong> <%= @project.author&.name || 'Nieznany' %></p>
+    <p><strong>Osoba odpowiedzialna:</strong> <%= @project.assignee&.name || 'Nieprzypisany' %></p>
+  </div>
+
+  <div class="project-actions">
+    <%= link_to 'Zobacz backlog ryzyk', project_risks_path(@project), class: 'btn btn-secondary' %>
+    <%= link_to 'Edytuj projekt', edit_project_path(@project), class: 'btn btn-primary' %>
+  </div>
+</div>
+

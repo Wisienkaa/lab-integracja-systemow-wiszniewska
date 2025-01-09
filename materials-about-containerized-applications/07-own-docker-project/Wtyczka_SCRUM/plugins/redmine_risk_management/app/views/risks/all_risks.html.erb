@@ -1,0 +1,72 @@
+<%= stylesheet_link_tag '/plugin_assets/redmine_risk_management/stylesheets/sprint_management.css' %>
+
+<div class="sprint-form-container">
+  <h1>Backlog Ryzyk</h1>
+
+  <% if @risks.any? %> 
+    <table class="risk-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Tytuł</th>
+          <th>Opis</th>
+          <th>Likelihood</th>
+          <th>Impact</th>
+          <th>Projekt</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @risks.each do |risk| %>
+          <tr>
+            <td><%= risk.id %></td>
+            <td><%= risk.title %></td>
+            <td><%= risk.description %></td>
+            <td><%= risk.likelihood %></td>
+            <td><%= risk.impact %></td>
+            <td>
+              <% if risk.project %>
+                <%= link_to risk.project.name, project_path(risk.project) %>
+              <% else %>
+                Brak przypisanego projektu
+              <% end %>
+            </td>
+            <td><%= risk.status %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>Brak ryzyk w systemie.</p>
+  <% end %>
+  
+  <!-- Macierz Ryzyka -->
+  <h2>Macierz Ryzyka</h2>
+  <table class="risk-matrix">
+    <thead>
+      <tr>
+        <th>Prawdopodobieństwo / Wpływ</th>
+        <% (0..5).each do |impact| %>
+          <th><%= impact %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% (0..5).each do |likelihood| %>
+        <tr>
+          <td><%= likelihood %></td>
+          <% (0..5).each do |impact| %>
+            <td class="<%= risk_cell_class(likelihood, impact) %>">
+              <% risk = @risks.find { |r| r.likelihood == likelihood && r.impact == impact } %>
+              <% if risk && risk.project %>
+                <%= link_to "#{risk.title} (Priorytet: #{risk.priority})", project_risk_path(risk.project, risk) %>
+              <% else %>
+                - 
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div> <!-- Zakończenie kontenera -->

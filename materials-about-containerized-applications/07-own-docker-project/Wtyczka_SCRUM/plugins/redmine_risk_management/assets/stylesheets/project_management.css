@@ -1,0 +1,103 @@
+
+.project-details-container {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+ 
+  .project-header {
+    font-size: 24px;
+    font-weight: bold;
+    color: #219cbe;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+ 
+  .project-details {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .project-details p {
+    margin: 0;
+    font-size: 13px;
+    color: #555;
+  }
+  
+  .project-details p strong {
+    color: #333;
+  }
+  
+  /* Linki i przyciski */
+  .project-actions {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .project-actions a {
+    display: inline-block;
+    margin: 10px 10px 0;
+    padding: 10px 20px;
+    background-color: #628db6;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.2s;
+  }
+  
+  .project-actions a:hover {
+    background-color: #50729b;
+  }
+  
+  /* Dodatkowe style dla priorytetów */
+  .project-priority {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: #ffffff;
+    font-weight: bold;
+  }
+  
+  .project-priority.high {
+    background-color: #d9534f;
+  }
+  
+  .project-priority.normal {
+    background-color: #5bc0de;
+  }
+  
+  .project-priority.immediate {
+    background-color: #cd951c;
+  }
+  
+  .form-control {
+  width: 100%;
+  padding: 8px;
+  margin-top: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.project-actions-btn {
+  padding: 10px 20px;
+  text-align: center;
+  background-color: #50729b !important;
+  color: #f5f1f1;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.project-actions-btn:hover {
+  background-color: #50729b;
+}
