@@ -1,55 +1,81 @@
-Docker for Beginners with Hands-on labs - notatki z kursu
+# Docker for Beginners with Hands-on Labs - Notatki z Kursu
 
-Why do we need Docker?
-Compatibility/Dependency
-Long setup time
-Different Dev/Test/Prod environments
-We can run each component in separated container with their own Libs and Depencencies on same virtual machine.
-Containers are isolated environments. They share the same OS Kernel.
-Docker can run any flavour of OS on top of container as long as they are all based on the same kernel.
-Containers vs Virtual Machines (VMs) are two different methods for running multiple isolated applications on a single system. While they serve similar purposes—enabling the deployment and management of applications—they achieve this in different ways, leading to distinct advantages and trade-offs.
-![venv](p/1.1.png)
+## Why do we need Docker?
 
-Performance Near-native performance Some performance overhead
-Security Less isolated, shared kernel Highly isolated, full OS
-Startup Time Very fast (milliseconds) Slower (seconds to minutes)
-Use Cases Microservices, cloud-native apps Legacy apps, multi-OS environments
-Public docker registry - Docker Hub
-How to get started with Docker?
-Indentify your system,choose one and pick your OS flavour (for example UbuntU)
-Uninstall any other version if one exist
-Set up a repository and install a software
-The easier way to install Docker is using the convenience script.
+### Compatibility/Dependency
+
+- Long setup time
+- Different Dev/Test/Prod environments
+
+Docker allows us to run each component in a separate container with their own libraries and dependencies on the same virtual machine. Containers are isolated environments that share the same OS kernel. Docker can run any flavor of OS on top of the container as long as they are based on the same kernel.
+
+### Containers vs Virtual Machines (VMs)
+
+| **Aspect**       | **Containers**                   | **Virtual Machines**               |
+| ---------------- | -------------------------------- | ---------------------------------- |
+| **Performance**  | Near-native performance          | Some performance overhead          |
+| **Security**     | Less isolated, shared kernel     | Highly isolated, full OS           |
+| **Startup Time** | Very fast (milliseconds)         | Slower (seconds to minutes)        |
+| **Use Cases**    | Microservices, cloud-native apps | Legacy apps, multi-OS environments |
+
+![Containers vs Virtual Machines](p/1.1.png)
+
+## Public Docker Registry - Docker Hub
+
+Docker Hub is the default public registry for Docker. It contains images for a wide variety of applications and services.
+
+## How to get started with Docker?
+
+### Step 1: Identify your system
+
+Choose your OS flavor (e.g., Ubuntu) and ensure that no other version of Docker is installed.
+
+### Step 2: Install Docker
+
+The easiest way to install Docker is using the convenience script:
+
+```bash
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
-Whalesay is simple image for docker
-sudo docker run docker/whalesay cowsay Hello-World!
-After that i solve a simple test of knowledge about docker.
+```
+
+Docker Knowledge Test
 What does Docker primarily use to isolate application dependencies?
-For sure containers!
+
+Answer: Containers
 Which type of container does Docker utilize?
-LXC
+
+Answer: LXC (Linux Containers)
 Which of the following are benefits of using Docker to simplify the setup of complex application stacks and address compatibility issues?
-Docker ensures that applications run the same regardless of where they are run
-Docker eliminates the need for virtual machines
-Docker containers are lightweight
+
+Answer:
+Docker ensures that applications run the same regardless of where they are run.
+Docker eliminates the need for virtual machines.
+Docker containers are lightweight.
 Which of the following platforms does Docker support?
+
+Answer:
 Linux
 Windows
 macOS
 Which of the following is not a reason to use Docker for deploying applications?
-It increases the size of applications.
+
+Answer: It increases the size of applications.
 How many main editions does Docker have?
-2 (Docker Community Edition (CE) i Docker Enterprise Edition (EE))
+
+Answer: 2 (Docker Community Edition (CE) and Docker Enterprise Edition (EE))
 Which of the following is a key difference between the community and enterprise editions of Docker?
-The enterprise edition offers additional features such as advanced management capabilities
+
+Answer: The enterprise edition offers additional features such as advanced management capabilities.
 Twoja ocena
 100%
 Do zaliczenia wymagane jest co najmniej 80%. Zachowujemy najnowszy wynik.
 
-Moduł nr 2 - notatki
+# Moduł nr 2 - Notatki
 
-Uruchamianie kontenerów:
+## Uruchamianie kontenerów
+
+Aby uruchomić kontener z obrazu, użyj polecenia:
 
 ```bash
 docker run uruchamia kontener z obrazu.
@@ -212,7 +238,7 @@ Następnie uruchom: docker exec <id-kontenera> cat /etc/\*release
 
 Funkcjonalność: To polecenie umożliwia interakcję z systemem plików i procesami wewnątrz kontenera.
 
-Hands-on Lab: Basic Docker Commands - ćwiczenia
+## Hands-on Lab: Basic Docker Commands - ćwiczenia
 
 https://kodekloud.com/pages/free-labs/docker/docker-basic-commands
 
@@ -306,10 +332,11 @@ docker rmi
 docker stop
 ​​​​​​​docker pull
 
-Moduł 3 - Docker Run
+# Moduł 3 - Docker Run
 
-Docker run i wersje obrazów
+##ocker run i wersje obrazów
 Aby uruchomić kontener z określoną wersją obrazu, używa się tagu:
+z
 Przykład: docker run redis:4.0 (uruchamia Redis w wersji 4.0).
 W przypadku braku podania tagu, Docker domyślnie uruchomi najnowszą wersję (latest).
 Informacje o dostępnych wersjach obrazów można znaleźć na Docker Hub.
@@ -354,7 +381,8 @@ Można zmapować port kontenera na zewnętrzny port hosta, aby uzyskać dostęp 
 Testy praktyczne i teoretyczne
 Use the link provided to access the lab and delve into the hands-on practice of the topic you just learned.  
 https://kodekloud.com/pages/free-labs/docker/docker-run
-Zadanie na ocenę: Docker run
+
+## Zadanie na ocenę: Docker run
 
 1. Which command would you use to run a Docker container with a specific image tag?
    docker run imagename:tag
@@ -387,7 +415,8 @@ Zadanie na ocenę: Docker run
     Twoja ocena
     Do zaliczenia wymagane jest co najmniej 80%. Zachowujemy najnowszy wynik.90%
 
-Moduł 4 - Docker Images - podsumowanie modułu
+# Moduł 4 - Docker Images - podsumowanie modułu
+
 Dlaczego warto jest używać obrazów w Dockerze?
 Jeśli komponent lub usługa nie jest dostępna na Docker Hub, warto umieć stworzyć własny obraz.
 Obrazy ułatwiają wdrażanie i dystrybucję aplikacji w zespole.
@@ -486,7 +515,8 @@ Writing a Dockerfile is the first step in creating a custom Docker image, but it
 
 While pushing the Docker image to Docker Hub can be done as part of the deployment process, it's not a necessary step in deploying a Docker container.
 
-Moduł 5 - Docker Compose - podsumowanie modułu
+# Moduł 5 - Docker Compose - podsumowanie modułu
+
 Docker Compose: Umożliwia uruchamianie złożonych aplikacji z wieloma usługami za pomocą pliku konfiguracyjnego w formacie YAML (docker-compose.yml).
 Przykładowa aplikacja do głosowania składa się z:
 Voting App: Aplikacja webowa napisana w Pythonie, która zbiera głosy.
@@ -552,7 +582,8 @@ Użytkownik i hasło dla bazy danych muszą być zgodne z tymi, które są używ
 Po wprowadzeniu odpowiednich poprawek i ponownym uruchomieniu kontenerów, wszystko zostało pomyślnie uruchomione.
 Aplikacja głosowania dostępna jest pod portem 5000, a wyniki pod portem 5001.
 
-Hands-on Lab: Docker Compose
+## Hands-on Lab: Docker Compose
+
 https://kodekloud.com/pages/free-labs/docker/docker-compose
 Test - Docker Compose
 
@@ -582,7 +613,8 @@ automatically creates a network for the containers, allowing them to communicate
 
 Db initialization errors
 
-Moduł 6 - Komponenty i architektura Docker Engine
+# Moduł 6 - Komponenty i architektura Docker Engine
+
 Docker Engine odnosi się do hosta, na którym jest zainstalowany Docker.
 Instalacja Dockera na hoście z systemem Linux obejmuje trzy główne komponenty:
 Docker Daemon: Proces działający w tle, zarządzający obiektami Dockera, takimi jak obrazy, kontenery, wolumeny i sieci.
@@ -636,7 +668,7 @@ CentOS/Fedora: Domyślnie stosuje się Device Mapper lub Overlay2.
 Docker - Hands on lab - praktyka
 https://kodekloud.com/pages/free-labs/docker/docker-storage
 
-Docker Engine and Storage - test teoretyczny
+## Docker Engine and Storage - test teoretyczny
 
 1. What is the role of storage drivers in Docker's layered architecture?
    They enable the layered architecture.
@@ -673,7 +705,8 @@ Docker Engine and Storage - test teoretyczny
 Twoja ocena 90%
 Do zaliczenia wymagane jest co najmniej 80%. Zachowujemy najnowszy wynik.
 
-Moduł 7 - Sieci Dockerowe
+# Moduł 7 - Sieci Dockerowe
+
 Po zainstalowaniu Dockera automatycznie tworzone są trzy sieci:
 Bridge (domyślna sieć): do której kontenery są przypisywane automatycznie.
 Host: umożliwia bezpośredni dostęp do sieci hosta.
@@ -700,7 +733,8 @@ Docker używa network namespaces, tworząc osobną przestrzeń sieciową dla ka�
 Hands-on Lab: Docker Networking
 https://kodekloud.com/pages/free-labs/docker/docker-network
 
-Docker Register
+## Docker Register
+
 Rejestr to miejsce, skąd Docker pobiera obrazy do uruchomienia kontenerów. Domyślny rejestr Docker to Docker Hub (docker.io), ale istnieją też inne rejestry, jak Google Container Registry (gcr.io) dla obrazów związanych z Kubernetesem czy prywatne rejestry u dostawców chmurowych (AWS, Azure, GCP).
 Podczas uruchamiania kontenera, na przykład za pomocą komendy docker run nginx, Docker domyślnie pobiera obraz nginx z rejestru Docker Hub, używając pełnej nazwy library/nginx. Prefiks library wskazuje, że jest to oficjalny obraz z Docker Hub.
 W przypadku aplikacji wewnętrznych, które nie powinny być publicznie dostępne, dobrym rozwiązaniem jest utworzenie prywatnego rejestru. Wielu dostawców chmurowych oferuje domyślny prywatny rejestr w ramach swojego środowiska (AWS, GCP). Obrazy w tych rejestrach mogą być prywatne, trzeba używać docker login.
@@ -710,7 +744,9 @@ Kroki:
 Uruchamiam rejestr na porcie 5000: Wykorzystując obraz registry, mogę uruchomić prywatny rejestr Docker na lokalnym hoście, np. docker run -d -p 5000:5000 registry.
 Tagowanie i przesyłanie obrazu: Obraz, który chcę umieścić w rejestrze, muszę otagować z użyciem adresu rejestru, np. localhost:5000/myimage, a następnie przesłać go do rejestru za pomocą docker push localhost:5000/myimage.
 Pobieranie obrazu z prywatnego rejestru: Obrazy z prywatnego rejestru można pobierać, używając adresu localhost (dla tego samego hosta) lub adresu IP/nazwy domeny rejestru, jeśli dostęp odbywa się z innego urządzenia w sieci.
-Hands-on Lab: Docker Registry
+
+## Hands-on Lab: Docker Registry
+
 https://kodekloud.com/pages/free-labs/docker/docker-registry
 Docker Networking and Registry - test teoretyczny
 
@@ -752,7 +788,8 @@ docker network connect
 Twoja ocena 80%
 Do zaliczenia wymagane jest co najmniej 80%. Zachowujemy najnowszy wynik.
 
-Moduł 8 - Docker on Windows
+# Moduł 8 - Docker on Windows
+
 Kontenery i system: Kontenery współdzielą system operacyjy, więc kontenery Windows nie działają na hostach Linux i odwrotnie
 Opcje Dockera na Windows:
 Docker Toolbox:
@@ -819,7 +856,7 @@ Docker compose up -d
 Weszłam na local hosta http://localhost:3000/admin/ i zmieniłam hasło dla admina
 Aplikacja działa.
 
-Moduł 9 - Orkiestracja kontenerów i Docker Swarm
+# Moduł 9 - Orkiestracja kontenerów i Docker Swarm
 
 Orkiestracja kontenerów to zestaw narzędzi i skryptów umożliwiających zarządzanie, skalowanie oraz utrzymanie wielu kontenerów w środowisku produkcyjnym.
 Zarządzanie pojedynczymi kontenerami na jednym hoście jest niewystarczające w przypadku dużych aplikacji wymagających wielu instancji oraz wysokiej dostępności.
@@ -924,7 +961,8 @@ Container Orchestration - zadanie na ocenę
 Twoja ocena 80%
 Do zaliczenia wymagane jest co najmniej 80%. Zachowujemy najnowszy wynik.
 
-Moduł 10 - Wprowadzenie do YAML
+# Moduł 10 - Wprowadzenie do YAML
+
 YAML służy do przechowywania danych konfiguracyjnych.
 Użycie YAML jest podobne do XML i JSON, ale jest bardziej czytelne dla człowieka.
 Struktury danych w YAML:

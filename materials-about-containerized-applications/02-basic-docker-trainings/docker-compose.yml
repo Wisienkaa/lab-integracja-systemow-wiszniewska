@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  simple-web-service:
+    image: devopsdockeruh/simple-web-service:ubuntu
+    container_name: simple-web-service
+    volumes:
+      - ./logs:/usr/src/app
+    command: tail -f /usr/src/app/text.log
