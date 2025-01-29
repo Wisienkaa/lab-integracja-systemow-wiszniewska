@@ -1,0 +1,44 @@
+docker pull python:3.9-slim
+
+uruchamianie kontenera interaktywnie
+docker run -it --name zal11-container python:3.9-slim /bin/bash
+
+echo "test file" > /usr/src/app/plik.txt
+
+cat /usr/src/app/plik.txt
+
+exit
+
+uruchamianie ponownie
+docker start -ai zal11-container
+
+wchodzenie
+docker exec -it zal11-container /bin/bash
+
+sprawdzam, czy jest plik
+ls -la /usr/src/app
+
+usuwam poprzedni kontener
+docker rm -f zal11-container
+
+dodajemy docker compose yml
+version: '3.8'
+services:
+  web:
+    image: python:3.9-slim
+    container_name: my-container
+    volumes:
+      - ./app-data:/usr/src/app
+    stdin_open: true
+    tty: true
+
+docker-compose up -d
+docker exec -it my-container /bin/bash
+echo "Persistent file via docker-compose" > /usr/src/app/plik.txt
+cat /usr/src/app/plik.txt
+exit
+docker-compose down
+docker-compose up -d
+docker exec -it my-container /bin/bash
+cat /usr/src/app/plik.txt
+

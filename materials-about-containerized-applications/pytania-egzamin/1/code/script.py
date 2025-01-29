@@ -1,0 +1,1 @@
+print("nie lubię zaliczeń")

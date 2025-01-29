@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  web:
+    image: python:3.9-slim
+    container_name: zal11-container
+    volumes:
+      - ./app-data:/usr/src/app
+    stdin_open: true
+    tty: true

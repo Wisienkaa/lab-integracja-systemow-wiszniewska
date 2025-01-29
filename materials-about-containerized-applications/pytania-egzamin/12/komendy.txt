@@ -1,0 +1,4 @@
+docker build -t wisienkaa/my-docker-image:v1.0 .
+docker push wisienkaa/my-docker-image:v1.0
+docker rmi wisienkaa/my-docker-image:v1.0
+docker pull wisienkaa/my-docker-image:v1.0

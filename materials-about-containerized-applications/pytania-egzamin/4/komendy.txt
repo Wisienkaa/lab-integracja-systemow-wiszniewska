@@ -1,0 +1,59 @@
+Różnica między ENTRYPOINT a CMD
+CMD → Określa domyślną komendę, ale można ją nadpisać przy uruchamianiu kontenera.
+ENTRYPOINT → Traktuje podaną komendę jako główny proces kontenera, a argumenty można dodawać przy uruchomieniu.
+Jeśli używasz obu, to CMD przekazuje argumenty do ENTRYPOINT.
+
+docker build -t cmd-example1 .
+docker run --rm cmd-example1
+
+nadpisanie cmd
+docker run --rm cmd-example1 echo "New command!"
+
+test entrypoint
+Modyfikacja dockerfile
+FROM ubuntu:latest
+
+WORKDIR /app
+
+COPY app/script.sh /app/script.sh
+RUN chmod +x /app/script.sh
+
+ENTRYPOINT ["/bin/bash", "/app/script.sh"]
+
+
+
+docker build -t entrypoint-example2 .
+docker run --rm entrypoint-example2
+
+a teraz argumentem
+docker run --rm entrypoint-example2 echo "Extra argument!"
+
+ENTRYPOINT ignoruje dodatkowe argumenty, ponieważ nie zostały one przekazane w skrypcie.
+
+Jeśli chcemy, żeby ENTRYPOINT akceptował argumenty, możemy zmodyfikować script.sh i Dockerfile.
+mof skryptu
+#!/bin/bash
+echo "Hello from script!"
+echo "Arguments: $@"
+
+no i mod dockerfile
+FROM ubuntu:latest
+
+WORKDIR /app
+
+COPY app/script.sh /app/script.sh
+RUN chmod +x /app/script.sh
+
+ENTRYPOINT ["/app/script.sh"]
+CMD ["default argument"]
+
+docker build -t entrypoint-cmd-example3 .
+
+uruchamianie kontenera bez arg
+docker run --rm entrypoint-cmd-example3
+
+uruchamianie kontenera z arg
+docker run --rm entrypoint-cmd-example custom argument
+
+
+

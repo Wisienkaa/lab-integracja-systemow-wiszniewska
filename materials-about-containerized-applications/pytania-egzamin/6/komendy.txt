@@ -1,0 +1,8 @@
+docker build -t my-python-app .
+docker run --rm my-python-app
+
+docker run --rm -it my-python-app /bin/sh
+ls ll
+COPY poprawnie skopiowało app/requirements.txt i app/ do /app/
+ADD poprawnie dodało README.md do /app/
+WORKDIR ustawił katalog /app/ jako główny katalog w kontenerze
